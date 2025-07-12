@@ -1,0 +1,12 @@
+# Run linting and formatting checks
+echo "🔍 Running ESLint..."
+yarn lint:fix
+
+echo "🎨 Running Prettier..."
+yarn format
+
+echo "📝 Updating CLAUDE.md..."
+yarn update-claude
+
+# Add any fixed files to the commit
+git add .
