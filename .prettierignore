@@ -1,0 +1,12 @@
+node_modules/
+dist/
+build/
+.husky/
+playwright-report/
+test-results/
+*.log
+*.md
+package-lock.json
+yarn.lock
+.env
+.env.*
