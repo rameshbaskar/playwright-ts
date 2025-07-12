@@ -1,0 +1,42 @@
+{
+  "name": "playwright-ts",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "author": "Ramesh Baskarasubramanian <ramesh.baskarasubramanian@live.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report",
+    "dev": "ts-node src/index.ts",
+    "update-claude": "ts-node scripts/update-claude-md.ts",
+    "lint": "eslint . --ext .ts,.js",
+    "lint:fix": "eslint . --ext .ts,.js --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "yarn lint && yarn format:check && yarn build",
+    "precommit": "yarn update-claude",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.1",
+    "@types/node": "^24.0.13",
+    "@types/pg": "^8.15.4",
+    "@typescript-eslint/eslint-plugin": "^8.36.0",
+    "@typescript-eslint/parser": "^8.36.0",
+    "eslint": "^9.31.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-playwright": "^2.2.0",
+    "eslint-plugin-prettier": "^5.5.1",
+    "husky": "^9.1.7",
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "pg": "^8.16.3"
+  }
+}
