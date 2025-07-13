@@ -1,4 +1,4 @@
-import Database from './database';
+import Database from './core/database';
 
 async function main() {
   console.log('🚀 Starting Playwright TypeScript application with PostgreSQL connection pooling');
