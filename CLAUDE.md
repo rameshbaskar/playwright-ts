@@ -1,6 +1,6 @@
 # CLAUDE.md - Codebase Overview
 
-*Last Updated: 2025-07-12*
+*Last Updated: 2025-07-13*
 
 ## Project Summary
 
@@ -43,19 +43,22 @@ A Playwright TypeScript testing framework with PostgreSQL integration featuring 
 - `tests/example.spec.ts` - Integration and UI tests (last modified: 2025-07-12)
 - `playwright.config.ts` - Playwright test configuration (last modified: 2025-07-12)
 - `tsconfig.json` - TypeScript compilation settings (last modified: 2025-07-12)
-- `package.json` - Project dependencies and npm scripts (last modified: 2025-07-12)
+- `package.json` - Project dependencies and npm scripts (last modified: 2025-07-13)
 
 ## Dependencies
 
 ### Production Dependencies
-- `pg@^8.16.3`
+
 
 ### Development Dependencies
+- `@ngneat/falso@^8.0.1`
 - `@playwright/test@^1.54.1`
 - `@types/node@^24.0.13`
 - `@types/pg@^8.15.4`
+- `@types/uuid@^10.0.0`
 - `@typescript-eslint/eslint-plugin@^8.36.0`
 - `@typescript-eslint/parser@^8.36.0`
+- `dotenv@^17.2.0`
 - `eslint@^9.31.0`
 - `eslint-config-prettier@^10.1.5`
 - `eslint-plugin-playwright@^2.2.0`
@@ -64,6 +67,8 @@ A Playwright TypeScript testing framework with PostgreSQL integration featuring 
 - `prettier@^3.6.2`
 - `ts-node@^10.9.2`
 - `typescript@^5.8.3`
+- `uuid@^11.1.0`
+- `pg@^8.16.3`
 
 ## Environment Configuration
 
@@ -153,13 +158,15 @@ Required environment variables:
 
 ## Git Status
 
-**Last Commit**: No git repository
+**Last Commit**: 7070d7c - Add comprehensive .gitignore file (15 hours ago)
 
-**Status**: Working directory clean
+**Uncommitted Changes**:
+- M  package.json
+- M  yarn.lock
 
 ## Recent Changes
 
-### 2025-07-12 - Auto-Updated
+### 2025-07-13 - Auto-Updated
 - Updated dependency information
 - Refreshed file modification timestamps
 - Synchronized git status
