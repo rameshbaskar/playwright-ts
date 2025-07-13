@@ -158,11 +158,10 @@ Required environment variables:
 
 ## Git Status
 
-**Last Commit**: 331b00f - chore: Extract BASE_URL as env variable (8 minutes ago)
+**Last Commit**: 7b5a210 - chore: Configure custom path in tsconfig.json (32 minutes ago)
 
 **Uncommitted Changes**:
-- M  tests/example.spec.ts
-- MM tsconfig.json
+- M  CLAUDE.md
 
 ## Recent Changes
 
