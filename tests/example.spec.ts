@@ -1,16 +1,16 @@
 import { test, expect } from '@playwright/test';
-import Database from '../src/database';
+import Database from '~/database';
 
 test.describe('Database Integration Tests', () => {
   let db: Database;
 
   test.beforeAll(async () => {
     db = Database.getInstance({
-      host: 'localhost',
-      port: 5432,
-      database: 'testdb',
-      user: 'postgres',
-      password: 'password',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT!),
+      database: process.env.DB_NAME,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
     });
   });
 
