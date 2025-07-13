@@ -38,7 +38,7 @@ A Playwright TypeScript testing framework with PostgreSQL integration featuring 
 - `.env.example` - Environment variables template for database configuration
 
 ### Source Code
-- `src/database.ts` - Database abstraction layer with connection pooling (last modified: 2025-07-12)
+- `src/database.ts` - Database abstraction layer with connection pooling (last modified: 2025-07-13)
 - `src/index.ts` - Application entry point and usage examples (last modified: 2025-07-12)
 - `tests/example.spec.ts` - Integration and UI tests (last modified: 2025-07-13)
 - `playwright.config.ts` - Playwright test configuration (last modified: 2025-07-13)
@@ -158,10 +158,12 @@ Required environment variables:
 
 ## Git Status
 
-**Last Commit**: 7b5a210 - chore: Configure custom path in tsconfig.json (32 minutes ago)
+**Last Commit**: 52e1e0d - chore: Update CLAUDE.md (19 minutes ago)
 
 **Uncommitted Changes**:
 - M  CLAUDE.md
+- M  src/database.ts
+- M  tests/example.spec.ts
 
 ## Recent Changes
 

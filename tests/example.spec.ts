@@ -5,13 +5,7 @@ test.describe('Database Integration Tests', () => {
   let db: Database;
 
   test.beforeAll(async () => {
-    db = Database.getInstance({
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT!),
-      database: process.env.DB_NAME,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-    });
+    db = Database.getInstance();
   });
 
   test.afterAll(async () => {

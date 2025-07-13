@@ -1,33 +1,20 @@
-import { Pool, PoolClient, PoolConfig } from 'pg';
-
-export interface DatabaseConfig extends PoolConfig {
-  host?: string;
-  port?: number;
-  database?: string;
-  user?: string;
-  password?: string;
-  max?: number;
-  idleTimeoutMillis?: number;
-  connectionTimeoutMillis?: number;
-}
+import { Pool, PoolClient } from 'pg';
 
 class Database {
   private pool: Pool;
   private static instance: Database;
 
-  private constructor(config: DatabaseConfig) {
-    const defaultConfig: DatabaseConfig = {
-      host: process.env.DB_HOST || 'localhost',
-      port: parseInt(process.env.DB_PORT || '5432'),
-      database: process.env.DB_NAME || 'testdb',
-      user: process.env.DB_USER || 'postgres',
-      password: process.env.DB_PASSWORD || 'password',
+  private constructor() {
+    this.pool = new Pool({
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT!),
+      database: process.env.DB_NAME,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
       max: 20, // maximum number of clients in the pool
       idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
       connectionTimeoutMillis: 2000, // how long to wait for a connection
-    };
-
-    this.pool = new Pool({ ...defaultConfig, ...config });
+    });
 
     // Handle pool errors
     this.pool.on('error', err => {
@@ -36,9 +23,9 @@ class Database {
     });
   }
 
-  public static getInstance(config?: DatabaseConfig): Database {
+  public static getInstance(): Database {
     if (!Database.instance) {
-      Database.instance = new Database(config || {});
+      Database.instance = new Database();
     }
     return Database.instance;
   }
