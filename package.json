@@ -15,9 +15,9 @@
     "update-claude": "ts-node scripts/update-claude-md.ts",
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "check": "yarn lint && yarn format:check && yarn build",
+    "prettier": "prettier --write .",
+    "prettier:check": "prettier --check .",
+    "check": "yarn lint && yarn prettier:check && yarn build",
     "precommit": "yarn update-claude",
     "prepare": "husky"
   },

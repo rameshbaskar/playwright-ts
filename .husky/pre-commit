@@ -3,7 +3,7 @@ echo "🔍 Running ESLint..."
 yarn lint:fix
 
 echo "🎨 Running Prettier..."
-yarn format
+yarn prettier
 
 echo "📝 Updating CLAUDE.md..."
 yarn update-claude

@@ -91,9 +91,9 @@ Required environment variables:
 - `yarn update-claude` - ts-node scripts/update-claude-md.ts
 - `yarn lint` - eslint . --ext .ts,.js
 - `yarn lint:fix` - eslint . --ext .ts,.js --fix
-- `yarn format` - prettier --write .
-- `yarn format:check` - prettier --check .
-- `yarn check` - yarn lint && yarn format:check && yarn build
+- `yarn prettier` - prettier --write .
+- `yarn prettier:check` - prettier --check .
+- `yarn check` - yarn lint && yarn prettier:check && yarn build
 - `yarn precommit` - yarn update-claude
 - `yarn prepare` - husky
 
@@ -158,12 +158,12 @@ Required environment variables:
 
 ## Git Status
 
-**Last Commit**: 52e1e0d - chore: Update CLAUDE.md (19 minutes ago)
+**Last Commit**: 6bbe1f2 - chore: Remove custom DatabaseConfig (7 hours ago)
 
 **Uncommitted Changes**:
+- M  .husky/pre-commit
 - M  CLAUDE.md
-- M  src/database.ts
-- M  tests/example.spec.ts
+- M  package.json
 
 ## Recent Changes
 
