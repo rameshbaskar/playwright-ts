@@ -1,6 +1,6 @@
 # CLAUDE.md - Codebase Overview
 
-*Last Updated: 2025-07-13*
+*Last Updated: 2025-07-16*
 
 ## Project Summary
 
@@ -38,9 +38,7 @@ A Playwright TypeScript testing framework with PostgreSQL integration featuring 
 - `.env.example` - Environment variables template for database configuration
 
 ### Source Code
-- `src/index.ts` - Application entry point and usage examples (last modified: 2025-07-13)
-- `tests/example.spec.ts` - Integration and UI tests (last modified: 2025-07-13)
-- `playwright.config.ts` - Playwright test configuration (last modified: 2025-07-13)
+- `playwright.config.ts` - Playwright test configuration (last modified: 2025-07-16)
 - `tsconfig.json` - TypeScript compilation settings (last modified: 2025-07-13)
 - `package.json` - Project dependencies and npm scripts (last modified: 2025-07-13)
 
@@ -157,16 +155,19 @@ Required environment variables:
 
 ## Git Status
 
-**Last Commit**: c0e1a5a - chore: Rename format command to prettier to be specific (2 minutes ago)
+**Last Commit**: 1ba9f84 - chore: Refactor to organise into specific folders (3 days ago)
 
 **Uncommitted Changes**:
-- R  src/database.ts -> src/core/database.ts
-- M  src/index.ts
-- M  tests/example.spec.ts
+- A  globalSetup.ts
+- A  globalTeardown.ts
+- M  playwright.config.ts
+- M  src/core/database.ts
+- D  src/index.ts
+- D  tests/example.spec.ts
 
 ## Recent Changes
 
-### 2025-07-13 - Auto-Updated
+### 2025-07-16 - Auto-Updated
 - Updated dependency information
 - Refreshed file modification timestamps
 - Synchronized git status
