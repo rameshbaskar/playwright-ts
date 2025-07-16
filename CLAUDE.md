@@ -155,15 +155,15 @@ Required environment variables:
 
 ## Git Status
 
-**Last Commit**: 1ba9f84 - chore: Refactor to organise into specific folders (3 days ago)
+**Last Commit**: ac55c88 - chore: Add global setup and teardown. Also refactored database integration. (2 hours ago)
 
 **Uncommitted Changes**:
-- A  globalSetup.ts
-- A  globalTeardown.ts
+- M  .prettierrc
+- M  globalSetup.ts
+- M  globalTeardown.ts
 - M  playwright.config.ts
+- M  scripts/update-claude-md.ts
 - M  src/core/database.ts
-- D  src/index.ts
-- D  tests/example.spec.ts
 
 ## Recent Changes
 

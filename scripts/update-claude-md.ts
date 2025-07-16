@@ -1,8 +1,8 @@
 #!/usr/bin/env ts-node
 
-import { readFileSync, writeFileSync, existsSync, statSync } from 'fs';
-import { execSync } from 'child_process';
-import { join } from 'path';
+import {readFileSync, writeFileSync, existsSync, statSync} from 'fs';
+import {execSync} from 'child_process';
+import {join} from 'path';
 
 interface PackageJson {
   name: string;
@@ -39,7 +39,7 @@ class ClaudeMdUpdater {
     return JSON.parse(readFileSync(packagePath, 'utf-8'));
   }
 
-  private getGitInfo(): { lastCommit: string; changes: string[] } {
+  private getGitInfo(): {lastCommit: string; changes: string[]} {
     try {
       const lastCommit = execSync('git log -1 --format="%h - %s (%cr)"', {
         encoding: 'utf-8',
@@ -52,9 +52,9 @@ class ClaudeMdUpdater {
         .filter(line => line.trim())
         .map(line => line.trim());
 
-      return { lastCommit, changes };
+      return {lastCommit, changes};
     } catch {
-      return { lastCommit: 'No git repository', changes: [] };
+      return {lastCommit: 'No git repository', changes: []};
     }
   }
 
@@ -93,9 +93,9 @@ class ClaudeMdUpdater {
     return purposes[filePath] || 'Project file';
   }
 
-  private getDependencyChanges(): { added: string[]; updated: string[]; removed: string[] } {
+  private getDependencyChanges(): {added: string[]; updated: string[]; removed: string[]} {
     // This would require storing previous state - for now, return empty
-    return { added: [], updated: [], removed: [] };
+    return {added: [], updated: [], removed: []};
   }
 
   public updateClaudeMd(): void {

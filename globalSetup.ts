@@ -1,4 +1,4 @@
-import { createPool } from '~/core/database';
+import {createPool} from '~/core/database';
 
 function globalSetup() {
   createPool();
