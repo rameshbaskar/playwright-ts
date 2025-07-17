@@ -12,7 +12,7 @@
     "test:ui": "playwright test --ui",
     "test:report": "playwright show-report",
     "dev": "ts-node src/index.ts",
-    "update-claude": "ts-node scripts/update-claude-md.ts",
+    "update-claude": "NODE_OPTIONS='--no-warnings=ExperimentalWarning' node --loader ts-node/esm scripts/update-claude-md.ts",
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix",
     "prettier": "prettier --write .",

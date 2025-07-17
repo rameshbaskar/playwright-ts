@@ -49,8 +49,8 @@ class ClaudeMdUpdater {
         encoding: 'utf-8',
       })
         .split('\n')
-        .filter(line => line.trim())
-        .map(line => line.trim());
+        .filter((line) => line.trim())
+        .map((line) => line.trim());
 
       return {lastCommit, changes};
     } catch {
@@ -69,8 +69,8 @@ class ClaudeMdUpdater {
     ];
 
     return keyFiles
-      .filter(file => existsSync(join(this.projectRoot, file)))
-      .map(file => {
+      .filter((file) => existsSync(join(this.projectRoot, file)))
+      .map((file) => {
         const fullPath = join(this.projectRoot, file);
         const stats = statSync(fullPath);
         return {
@@ -144,7 +144,7 @@ A Playwright TypeScript testing framework with PostgreSQL integration featuring 
 - \`.env.example\` - Environment variables template for database configuration
 
 ### Source Code
-${keyFiles.map(file => `- \`${file.path}\` - ${file.purpose} (last modified: ${file.lastModified})`).join('\n')}
+${keyFiles.map((file) => `- \`${file.path}\` - ${file.purpose} (last modified: ${file.lastModified})`).join('\n')}
 
 ## Dependencies
 
@@ -240,7 +240,7 @@ ${Object.entries(packageInfo.scripts || {})
 ${
   gitInfo.changes.length > 0
     ? `**Uncommitted Changes**:
-${gitInfo.changes.map(change => `- ${change}`).join('\n')}`
+${gitInfo.changes.map((change) => `- ${change}`).join('\n')}`
     : '**Status**: Working directory clean'
 }
 

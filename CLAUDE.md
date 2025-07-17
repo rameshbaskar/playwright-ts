@@ -1,6 +1,6 @@
 # CLAUDE.md - Codebase Overview
 
-*Last Updated: 2025-07-16*
+*Last Updated: 2025-07-17*
 
 ## Project Summary
 
@@ -38,9 +38,9 @@ A Playwright TypeScript testing framework with PostgreSQL integration featuring 
 - `.env.example` - Environment variables template for database configuration
 
 ### Source Code
-- `playwright.config.ts` - Playwright test configuration (last modified: 2025-07-16)
-- `tsconfig.json` - TypeScript compilation settings (last modified: 2025-07-13)
-- `package.json` - Project dependencies and npm scripts (last modified: 2025-07-13)
+- `playwright.config.ts` - Playwright test configuration (last modified: 2025-07-17)
+- `tsconfig.json` - TypeScript compilation settings (last modified: 2025-07-17)
+- `package.json` - Project dependencies and npm scripts (last modified: 2025-07-17)
 
 ## Dependencies
 
@@ -85,7 +85,7 @@ Required environment variables:
 - `yarn test:ui` - playwright test --ui
 - `yarn test:report` - playwright show-report
 - `yarn dev` - ts-node src/index.ts
-- `yarn update-claude` - ts-node scripts/update-claude-md.ts
+- `yarn update-claude` - NODE_OPTIONS='--no-warnings=ExperimentalWarning' node --loader ts-node/esm scripts/update-claude-md.ts
 - `yarn lint` - eslint . --ext .ts,.js
 - `yarn lint:fix` - eslint . --ext .ts,.js --fix
 - `yarn prettier` - prettier --write .
@@ -155,19 +155,24 @@ Required environment variables:
 
 ## Git Status
 
-**Last Commit**: ac55c88 - chore: Add global setup and teardown. Also refactored database integration. (2 hours ago)
+**Last Commit**: 5521887 - chore: Update prettier config (13 hours ago)
 
 **Uncommitted Changes**:
 - M  .prettierrc
+- M  CLAUDE.md
+- M  eslint.config.js
 - M  globalSetup.ts
 - M  globalTeardown.ts
+- M  package.json
 - M  playwright.config.ts
 - M  scripts/update-claude-md.ts
 - M  src/core/database.ts
+- A  src/core/types.ts
+- M  tsconfig.json
 
 ## Recent Changes
 
-### 2025-07-16 - Auto-Updated
+### 2025-07-17 - Auto-Updated
 - Updated dependency information
 - Refreshed file modification timestamps
 - Synchronized git status

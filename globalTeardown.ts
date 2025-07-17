@@ -1,4 +1,4 @@
-import {closePool} from '~/core/database';
+import {closePool} from '@src/core/database';
 
 async function globalTeardown() {
   await closePool();

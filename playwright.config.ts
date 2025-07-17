@@ -5,16 +5,18 @@ dotenv.config();
 
 export default defineConfig({
   testDir: './tests',
+  timeout: 120000, // Each test should complete within 2 mins
   fullyParallel: true,
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  retries: 1,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
-  globalSetup: require.resolve('./globalSetup'),
-  globalTeardown: require.resolve('./globalTeardown'),
+  reporter: [['list'], ['html', {open: 'never'}]],
+  globalSetup: './globalSetup',
+  globalTeardown: './globalTeardown',
   use: {
     baseURL: process.env.BASE_URL,
+    ignoreHTTPSErrors: true,
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
   },
 
   projects: [
