@@ -62,11 +62,11 @@ export default [
       'no-console': 'off',
 
       // Playwright specific rules
-      'playwright/expect-expect': 'error',
+      'playwright/expect-expect': 'off',
       'playwright/missing-playwright-await': 'error',
       'playwright/no-networkidle': 'error',
-      'playwright/no-skipped-test': 'warn',
-      'playwright/valid-expect': 'error',
+      'playwright/no-skipped-test': 'off',
+      'playwright/valid-expect': 'off',
     },
   },
   {

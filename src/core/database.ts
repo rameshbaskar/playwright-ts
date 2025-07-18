@@ -1,4 +1,5 @@
 import {Pool} from 'pg';
+import {DatabaseStatement} from './types';
 
 let pool: Pool;
 
@@ -43,10 +44,21 @@ export const read = async (sql: string, params?: unknown[]): Promise<unknown[]> 
 };
 
 export const write = async (sql: string, params?: unknown[]): Promise<void> => {
+  await writeInTransaction([
+    {
+      sql: sql,
+      params: params,
+    },
+  ]);
+};
+
+export const writeInTransaction = async (statements: DatabaseStatement[]) => {
   const client = await getClient();
   try {
     await client.query('BEGIN');
-    await client.query(sql, params);
+    for (const statement of statements) {
+      await client.query(statement.sql, statement.params);
+    }
     await client.query('COMMIT');
   } catch (error) {
     await client.query('ROLLBACK');

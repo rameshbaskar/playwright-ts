@@ -1,6 +1,6 @@
 # CLAUDE.md - Codebase Overview
 
-*Last Updated: 2025-07-17*
+*Last Updated: 2025-07-18*
 
 ## Project Summary
 
@@ -55,17 +55,18 @@ A Playwright TypeScript testing framework with PostgreSQL integration featuring 
 - `@types/uuid@^10.0.0`
 - `@typescript-eslint/eslint-plugin@^8.36.0`
 - `@typescript-eslint/parser@^8.36.0`
+- `bcrypt-ts@^7.1.0`
 - `dotenv@^17.2.0`
 - `eslint@^9.31.0`
 - `eslint-config-prettier@^10.1.5`
 - `eslint-plugin-playwright@^2.2.0`
 - `eslint-plugin-prettier@^5.5.1`
 - `husky@^9.1.7`
+- `pg@^8.16.3`
 - `prettier@^3.6.2`
 - `ts-node@^10.9.2`
 - `typescript@^5.8.3`
 - `uuid@^11.1.0`
-- `pg@^8.16.3`
 
 ## Environment Configuration
 
@@ -155,24 +156,29 @@ Required environment variables:
 
 ## Git Status
 
-**Last Commit**: 5521887 - chore: Update prettier config (13 hours ago)
+**Last Commit**: 73e709d - chore: Cleanup (27 hours ago)
 
 **Uncommitted Changes**:
-- M  .prettierrc
 - M  CLAUDE.md
 - M  eslint.config.js
-- M  globalSetup.ts
-- M  globalTeardown.ts
 - M  package.json
-- M  playwright.config.ts
-- M  scripts/update-claude-md.ts
+- A  src/apiStubs/loginAPI.stub.ts
 - M  src/core/database.ts
-- A  src/core/types.ts
-- M  tsconfig.json
+- A  src/core/driver.ts
+- A  src/core/element.ts
+- A  src/core/pageHelper.ts
+- M  src/core/types.ts
+- A  src/core/utils.ts
+- A  src/fixtures/mockResponses/loginSuccessResponse.json
+- A  src/pages/common/header.section.ts
+- A  src/pages/common/login.page.ts
+- A  src/seeds/user.seed.ts
+- A  tests/header.spec.ts
+- M  yarn.lock
 
 ## Recent Changes
 
-### 2025-07-17 - Auto-Updated
+### 2025-07-18 - Auto-Updated
 - Updated dependency information
 - Refreshed file modification timestamps
 - Synchronized git status
