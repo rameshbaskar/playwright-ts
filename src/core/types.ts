@@ -12,3 +12,10 @@ export type DatabaseStatement = {
   sql: string;
   params?: unknown[];
 };
+
+export type GoogleAnalyticsEvent = {
+  eventName: string;
+  eventAction: string;
+  eventCategory: string;
+  eventLabel?: string;
+};

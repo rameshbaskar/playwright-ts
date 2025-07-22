@@ -1,6 +1,6 @@
 # CLAUDE.md - Codebase Overview
 
-*Last Updated: 2025-07-18*
+*Last Updated: 2025-07-22*
 
 ## Project Summary
 
@@ -156,29 +156,17 @@ Required environment variables:
 
 ## Git Status
 
-**Last Commit**: 73e709d - chore: Cleanup (27 hours ago)
+**Last Commit**: 036e44f - test: Add sample specs with custom element framework and API stubbing support (4 days ago)
 
 **Uncommitted Changes**:
-- M  CLAUDE.md
-- M  eslint.config.js
-- M  package.json
-- A  src/apiStubs/loginAPI.stub.ts
-- M  src/core/database.ts
-- A  src/core/driver.ts
-- A  src/core/element.ts
-- A  src/core/pageHelper.ts
+- M  src/core/driver.ts
+- M  src/core/pageHelper.ts
 - M  src/core/types.ts
-- A  src/core/utils.ts
-- A  src/fixtures/mockResponses/loginSuccessResponse.json
-- A  src/pages/common/header.section.ts
-- A  src/pages/common/login.page.ts
-- A  src/seeds/user.seed.ts
-- A  tests/header.spec.ts
-- M  yarn.lock
+- M  src/core/utils.ts
 
 ## Recent Changes
 
-### 2025-07-18 - Auto-Updated
+### 2025-07-22 - Auto-Updated
 - Updated dependency information
 - Refreshed file modification timestamps
 - Synchronized git status
