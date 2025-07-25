@@ -1,34 +1,46 @@
-import Element from '@src/core/element';
+import {expect, Locator} from '@playwright/test';
+import {getPage} from '@src/core/driver';
 
-// Elements
-const logoEl = new Element('header-logo');
-const homeLink = new Element('home-page-link');
-const loginLink = new Element('login-link');
-const logoutLink = new Element('logout-link');
+export default class HeaderSection {
+  private logoEl: Locator;
+  private homeLinkEl: Locator;
+  private loginLinkEl: Locator;
+  private logoutLinkEl: Locator;
 
-// Actions and Validations
-export const verifyLoaded = async () => {
-  const elements = [logoEl, homeLink];
-  for (const element of elements) {
-    await element.verifyHasAttribute('href', process.env.BASE_URL!);
-    await element.verifyHasAttribute('target', '_blank', false);
+  constructor() {
+    this.logoEl = getPage().getByTestId('header-logo');
+    this.homeLinkEl = getPage().getByRole('link', {name: 'Home'});
+    this.loginLinkEl = getPage().getByRole('link', {name: 'Login'});
+    this.logoutLinkEl = getPage().getByRole('link', {name: 'Logout'});
   }
-};
 
-export const verifyLoggedIn = async () => {
-  await logoutLink.verifyVisibility(true);
-  await loginLink.verifyVisibility(false);
-};
+  async shouldBeLoaded() {
+    // Logo
+    await expect(this.logoEl).toBeVisible();
+    await expect(this.logoEl).toHaveAttribute('href', process.env.BASE_URL!);
+    await expect(this.logoEl).toHaveAttribute('target', '_blank');
 
-export const verifyLoggedOut = async () => {
-  await logoutLink.verifyVisibility(false);
-  await loginLink.verifyVisibility(true);
-};
+    // Home page link
+    await expect(this.homeLinkEl).toBeVisible();
+    await expect(this.homeLinkEl).toHaveAttribute('href', process.env.BASE_URL!);
+    await expect(this.homeLinkEl).toHaveAttribute('target', '_blank');
+  }
 
-export const clickLogin = async () => {
-  await loginLink.click();
-};
+  async shouldBeLoggedIn() {
+    await expect(this.logoutLinkEl).toBeVisible();
+    await expect(this.loginLinkEl).toBeHidden();
+  }
 
-export const clickLogout = async () => {
-  await logoutLink.click();
-};
+  async shouldBeLoggedOut() {
+    await expect(this.logoutLinkEl).toBeHidden();
+    await expect(this.loginLinkEl).toBeVisible();
+  }
+
+  async clickLogin() {
+    await this.loginLinkEl.click();
+  }
+
+  async clickLogout() {
+    await this.logoutLinkEl.click();
+  }
+}

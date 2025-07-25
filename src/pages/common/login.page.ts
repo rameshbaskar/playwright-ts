@@ -1,19 +1,27 @@
+import {expect, Locator} from '@playwright/test';
+import {getPage} from '@src/core/driver';
 import {User} from '@src/core/types';
-import Element from '@src/core/element';
 
-const usernameTextBox = new Element('username-text-box');
-const passwordTextBox = new Element('password-text-box');
-const submitButton = new Element('button[type=submit]');
+export default class LoginPage {
+  private usernameTextBox: Locator;
+  private passwordTextBox: Locator;
+  private submitButton: Locator;
 
-export const verifyLoaded = async () => {
-  await usernameTextBox.verifyVisibility(true);
-  await passwordTextBox.verifyVisibility(true);
-  await submitButton.verifyVisibility(true);
-  await submitButton.verifyContainsText('Login');
-};
+  constructor() {
+    this.usernameTextBox = getPage().getByRole('textbox', {name: 'Username'});
+    this.passwordTextBox = getPage().getByRole('textbox', {name: 'Password'});
+    this.submitButton = getPage().getByRole('button', {name: 'Login'});
+  }
 
-export const login = async (user: User) => {
-  await usernameTextBox.fill(user.username);
-  await passwordTextBox.fill(user.password);
-  await submitButton.click();
-};
+  async shouldBeLoaded() {
+    await expect(this.usernameTextBox).toBeVisible();
+    await expect(this.passwordTextBox).toBeVisible();
+    await expect(this.submitButton).toBeVisible();
+  }
+
+  async login(user: User) {
+    await this.usernameTextBox.fill(user.username);
+    await this.passwordTextBox.fill(user.password);
+    await this.submitButton.click();
+  }
+}

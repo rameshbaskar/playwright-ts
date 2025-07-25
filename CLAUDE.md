@@ -1,6 +1,6 @@
 # CLAUDE.md - Codebase Overview
 
-*Last Updated: 2025-07-22*
+*Last Updated: 2025-07-25*
 
 ## Project Summary
 
@@ -40,7 +40,7 @@ A Playwright TypeScript testing framework with PostgreSQL integration featuring 
 ### Source Code
 - `playwright.config.ts` - Playwright test configuration (last modified: 2025-07-17)
 - `tsconfig.json` - TypeScript compilation settings (last modified: 2025-07-17)
-- `package.json` - Project dependencies and npm scripts (last modified: 2025-07-17)
+- `package.json` - Project dependencies and npm scripts (last modified: 2025-07-21)
 
 ## Dependencies
 
@@ -156,17 +156,18 @@ Required environment variables:
 
 ## Git Status
 
-**Last Commit**: 036e44f - test: Add sample specs with custom element framework and API stubbing support (4 days ago)
+**Last Commit**: 043fcfa - chore: Add additional features (3 days ago)
 
 **Uncommitted Changes**:
-- M  src/core/driver.ts
-- M  src/core/pageHelper.ts
-- M  src/core/types.ts
-- M  src/core/utils.ts
+- M  CLAUDE.md
+- D  src/core/element.ts
+- M  src/pages/common/header.section.ts
+- M  src/pages/common/login.page.ts
+- M  tests/header.spec.ts
 
 ## Recent Changes
 
-### 2025-07-22 - Auto-Updated
+### 2025-07-25 - Auto-Updated
 - Updated dependency information
 - Refreshed file modification timestamps
 - Synchronized git status
