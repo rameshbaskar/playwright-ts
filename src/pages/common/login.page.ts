@@ -1,16 +1,17 @@
-import {expect, Locator} from '@playwright/test';
-import {getPage} from '@src/core/driver';
+import {Page, expect, Locator} from '@playwright/test';
 import {User} from '@src/core/types';
 
 export default class LoginPage {
+  private page: Page;
   private usernameTextBox: Locator;
   private passwordTextBox: Locator;
   private submitButton: Locator;
 
-  constructor() {
-    this.usernameTextBox = getPage().getByRole('textbox', {name: 'Username'});
-    this.passwordTextBox = getPage().getByRole('textbox', {name: 'Password'});
-    this.submitButton = getPage().getByRole('button', {name: 'Login'});
+  constructor(page: Page) {
+    this.page = page;
+    this.usernameTextBox = this.page.getByRole('textbox', {name: 'Username'});
+    this.passwordTextBox = this.page.getByRole('textbox', {name: 'Password'});
+    this.submitButton = this.page.getByRole('button', {name: 'Login'});
   }
 
   async shouldBeLoaded() {

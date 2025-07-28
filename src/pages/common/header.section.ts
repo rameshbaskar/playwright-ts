@@ -1,17 +1,18 @@
-import {expect, Locator} from '@playwright/test';
-import {getPage} from '@src/core/driver';
+import {Page, expect, Locator} from '@playwright/test';
 
 export default class HeaderSection {
+  private page: Page;
   private logoEl: Locator;
   private homeLinkEl: Locator;
   private loginLinkEl: Locator;
   private logoutLinkEl: Locator;
 
-  constructor() {
-    this.logoEl = getPage().getByTestId('header-logo');
-    this.homeLinkEl = getPage().getByRole('link', {name: 'Home'});
-    this.loginLinkEl = getPage().getByRole('link', {name: 'Login'});
-    this.logoutLinkEl = getPage().getByRole('link', {name: 'Logout'});
+  constructor(page: Page) {
+    this.page = page;
+    this.logoEl = this.page.getByTestId('header-logo');
+    this.homeLinkEl = this.page.getByRole('link', {name: 'Home'});
+    this.loginLinkEl = this.page.getByRole('link', {name: 'Login'});
+    this.logoutLinkEl = this.page.getByRole('link', {name: 'Logout'});
   }
 
   async shouldBeLoaded() {
