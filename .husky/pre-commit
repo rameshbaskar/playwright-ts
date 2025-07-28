@@ -5,8 +5,5 @@ yarn lint:fix
 echo "🎨 Running Prettier..."
 yarn prettier
 
-echo "📝 Updating CLAUDE.md..."
-yarn update-claude
-
 # Add any fixed files to the commit
 git add .

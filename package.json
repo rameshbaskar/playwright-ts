@@ -12,13 +12,11 @@
     "test:ui": "playwright test --ui",
     "test:report": "playwright show-report",
     "dev": "ts-node src/index.ts",
-    "update-claude": "NODE_OPTIONS='--no-warnings=ExperimentalWarning' node --loader ts-node/esm scripts/update-claude-md.ts",
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix",
     "prettier": "prettier --write .",
     "prettier:check": "prettier --check .",
     "check": "yarn lint && yarn prettier:check && yarn build",
-    "precommit": "yarn update-claude",
     "prepare": "husky"
   },
   "devDependencies": {
