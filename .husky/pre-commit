@@ -4,6 +4,3 @@ yarn lint:fix
 
 echo "🎨 Running Prettier..."
 yarn prettier
-
-# Add any fixed files to the commit
-git add .
