@@ -1,4 +1,3 @@
-import {createPool} from '@src/core/database';
 import {open} from 'fs/promises';
 
 const validateEnvironment = async () => {
@@ -28,7 +27,6 @@ const getRequiredEnvVars = async () => {
 
 async function globalSetup() {
   await validateEnvironment();
-  createPool();
 }
 
 export default globalSetup;

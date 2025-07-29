@@ -3,7 +3,7 @@ import {DatabaseStatement} from './types';
 
 let pool: Pool;
 
-export const createPool = () => {
+const createPool = () => {
   pool = new Pool({
     host: process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT || '5432'),
