@@ -1,4 +1,5 @@
 import {Page, expect, Locator} from '@playwright/test';
+import env from '@src/core/environment';
 
 export default class HeaderSection {
   private page: Page;
@@ -18,12 +19,12 @@ export default class HeaderSection {
   async shouldBeLoaded() {
     // Logo
     await expect(this.logoEl).toBeVisible();
-    await expect(this.logoEl).toHaveAttribute('href', process.env.BASE_URL!);
+    await expect(this.logoEl).toHaveAttribute('href', env.BASE_URL);
     await expect(this.logoEl).toHaveAttribute('target', '_blank');
 
     // Home page link
     await expect(this.homeLinkEl).toBeVisible();
-    await expect(this.homeLinkEl).toHaveAttribute('href', process.env.BASE_URL!);
+    await expect(this.homeLinkEl).toHaveAttribute('href', env.BASE_URL);
     await expect(this.homeLinkEl).toHaveAttribute('target', '_blank');
   }
 

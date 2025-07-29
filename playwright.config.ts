@@ -1,19 +1,23 @@
 import {defineConfig, devices} from '@playwright/test';
-import * as dotenv from 'dotenv';
 
+// Load the environment
+import * as dotenv from 'dotenv';
 dotenv.config();
+
+// Validate the environment
+import env from '@src/core/environment';
 
 export default defineConfig({
   testDir: './tests',
   timeout: 120000, // Each test should complete within 2 mins
-  fullyParallel: true,
+  fullyParallel: env.FULLY_PARALLEL,
   retries: 1,
-  workers: process.env.CI ? 1 : undefined,
+  workers: env.CI ? 1 : undefined,
   reporter: [['list'], ['html', {open: 'never'}]],
   globalSetup: './globalSetup',
   globalTeardown: './globalTeardown',
   use: {
-    baseURL: process.env.BASE_URL,
+    baseURL: env.BASE_URL,
     ignoreHTTPSErrors: true,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',

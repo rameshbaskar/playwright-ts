@@ -1,5 +1,6 @@
 import {GoogleAnalyticsEvent} from './types';
 import {Page, expect, Request} from '@playwright/test';
+import env from '@src/core/environment';
 
 type DataLayerEvent = {
   event: string;
@@ -27,7 +28,7 @@ export default class PageHelper {
         eat: null,
       }),
     );
-    await this.goto(`${process.env.LOGIN_API_URL}?token=${token}&redirect=${process.env.BASE_URL}`);
+    await this.goto(`${env.LOGIN_API_URL}?token=${token}&redirect=${env.BASE_URL}`);
     await this.goto('/');
   }
 
