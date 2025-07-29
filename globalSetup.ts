@@ -1,16 +1,33 @@
 import {createPool} from '@src/core/database';
+import {open} from 'fs/promises';
 
-const REQUIRED_ENV_VARS = ['BASE_URL', 'DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME'];
-
-const validateEnvironment = () => {
-  const invalidVars = REQUIRED_ENV_VARS.filter((v) => !process.env[v]?.trim());
+const validateEnvironment = async () => {
+  const invalidVars = (await getRequiredEnvVars()).filter((v) => !process.env[v]?.trim());
   if (invalidVars.length > 0) {
     throw new Error(`The following environment variables are not defined:\n[${invalidVars.join(',')}]`);
   }
 };
 
-function globalSetup() {
-  validateEnvironment();
+const getRequiredEnvVars = async () => {
+  const requiredVars: string[] = [];
+  const fileHandle = await open('.env.example', 'r');
+
+  for await (const line of fileHandle.readLines()) {
+    const trimmedLine = line.trim();
+
+    // Ignore empty and commented lines
+    if (trimmedLine && !trimmedLine.startsWith('#')) {
+      const [envVar] = trimmedLine.split('=');
+      requiredVars.push(envVar.trim());
+    }
+  }
+
+  await fileHandle.close();
+  return requiredVars;
+};
+
+async function globalSetup() {
+  await validateEnvironment();
   createPool();
 }
 
