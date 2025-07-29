@@ -16,7 +16,7 @@ let loginAPIStub: LoginAPIStub;
 // Helpers
 let pageHelper: PageHelper;
 
-test.describe('Sample specs', () => {
+test.describe('User logs in and out', () => {
   let user: User;
 
   test.beforeEach(async ({page}) => {
@@ -28,39 +28,75 @@ test.describe('Sample specs', () => {
 
     // Data seeds
     user = await UserSeed.createUser();
-
-    // Default stubs
-    await loginAPIStub.simulateSuccess();
   });
   test.afterEach(async () => {
     await UserSeed.deleteUser(user);
   });
-  test(`should see the correct header`, async () => {
-    await headerSection.shouldBeLoaded();
-    await headerSection.shouldBeLoggedOut();
-  });
-  test(`should be able to login and logout from the header`, async () => {
-    // Login
-    await headerSection.clickLogin();
-    await loginPage.shouldBeLoaded();
-    await loginPage.login(user);
-    await headerSection.shouldBeLoggedIn();
+  test.describe('Success conditions', () => {
+    test.describe('User not logged in', () => {
+      test.beforeEach(async () => {
+        await loginAPIStub.simulateSuccess();
+      });
+      test(`should see the correct header`, async () => {
+        await headerSection.shouldBeLoaded();
+        await headerSection.shouldBeLoggedOut();
+      });
+      test(`should be able to login and logout from the header`, async () => {
+        // Login
+        await headerSection.clickLogin();
+        await loginPage.shouldBeLoaded();
+        await loginPage.login(user);
+        await headerSection.shouldBeLoggedIn();
 
-    // Logout
-    await headerSection.clickLogout();
-    await headerSection.shouldBeLoggedOut();
+        // Logout
+        await headerSection.clickLogout();
+        await headerSection.shouldBeLoggedOut();
+      });
+      test(`should send the GA event when clicking on Login from the header`, async () => {
+        await headerSection.clickLogin();
+        await pageHelper.verifyGoogleAnalyticsEvent({
+          eventName: 'LoginFromHeader',
+          eventAction: 'Login-From-Header',
+          eventCategory: 'Login',
+          eventLabel: user.guid,
+        });
+      });
+    });
+    test.describe('User already logged in', () => {
+      test.beforeEach(async () => {
+        await pageHelper.createLoggedInSession(user.username);
+      });
+      test(`should send the GA event when clicking on Logout from the header`, async () => {
+        await headerSection.clickLogout();
+        await pageHelper.verifyGoogleAnalyticsEvent({
+          eventName: 'LogoutFromHeader',
+          eventAction: 'Logout-From-Header',
+          eventCategory: 'Logout',
+          eventLabel: user.guid,
+        });
+      });
+    });
   });
-  test(`should see an error if login fails`, async () => {
-    await loginAPIStub.simulateFailure();
-    await headerSection.clickLogin();
-    await loginPage.login(user);
-  });
-  test(`should send the GA event when clicking on Login from the header`, async () => {
-    await headerSection.clickLogin();
-    await pageHelper.verifyGoogleAnalyticsEvent({
-      eventName: 'LoginFromHeader',
-      eventAction: 'Login-From-Header',
-      eventCategory: 'Login',
+  test.describe('Failure conditions', () => {
+    test(`should see an error if login is invalid`, async () => {
+      await loginAPIStub.simulateUnAuthorised();
+      await headerSection.clickLogin();
+      await loginPage.login(user);
+      await loginPage.shouldShowInvalidLoginError();
+
+      // Check the header in the home page
+      await pageHelper.goto('/');
+      await headerSection.shouldBeLoggedOut();
+    });
+    test(`should see an error if login API errors out`, async () => {
+      await loginAPIStub.simulateGeneralError();
+      await headerSection.clickLogin();
+      await loginPage.login(user);
+      await loginPage.shouldShowGeneralError();
+
+      // Check the header in the home page
+      await pageHelper.goto('/');
+      await headerSection.shouldBeLoggedOut();
     });
   });
 });

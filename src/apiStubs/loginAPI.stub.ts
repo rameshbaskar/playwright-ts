@@ -11,8 +11,4 @@ export default class LoginAPIStub extends APIRequest {
   async simulateSuccess() {
     await this.stub(loginSuccessResponse);
   }
-
-  async simulateFailure() {
-    await this.stub({}, 403);
-  }
 }

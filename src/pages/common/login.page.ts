@@ -25,4 +25,12 @@ export default class LoginPage {
     await this.passwordTextBox.fill(user.password);
     await this.submitButton.click();
   }
+
+  async shouldShowGeneralError() {
+    await expect(this.page.getByText('Cannot login. Please try after sometime.')).toBeVisible();
+  }
+
+  async shouldShowInvalidLoginError() {
+    await expect(this.page.getByText('Invalid Username or Password.')).toBeVisible();
+  }
 }

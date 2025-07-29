@@ -35,4 +35,16 @@ export default class APIRequest {
       }, timeInMS);
     });
   }
+
+  async simulateUnAuthorised() {
+    await this.stub({}, 403);
+  }
+
+  async simulateGeneralError() {
+    await this.stub({}, 500);
+  }
+
+  async simulateNotFound() {
+    await this.stub({}, 404);
+  }
 }

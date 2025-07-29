@@ -15,6 +15,22 @@ export default class PageHelper {
     this.page = page;
   }
 
+  async goto(url = '') {
+    await this.page.goto(url);
+  }
+
+  async createLoggedInSession(username: string) {
+    const token = encodeURIComponent(
+      JSON.stringify({
+        username: username,
+        iat: null,
+        eat: null,
+      }),
+    );
+    await this.goto(`${process.env.LOGIN_API_URL}?token=${token}&redirect=${process.env.BASE_URL}`);
+    await this.goto('/');
+  }
+
   async getDataLayerEvents() {
     return await this.page.evaluate('window.dataLayer');
   }
