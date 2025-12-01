@@ -1,4 +1,4 @@
-import {test} from '@src/baseTest';
+import {test} from '@playwright/test';
 import {User} from '@src/core/types';
 import UserSeed from '@src/seeds/user.seed';
 import HeaderSection from '@src/pages/common/header.section';
