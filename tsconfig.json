@@ -20,14 +20,6 @@
       "@src/*": ["./src/*"]
     }
   },
-  "include": [
-    "src/**/*",
-    "eslint.config.js",
-    "tests/**/*",
-    "scripts/**/*",
-    "playwright.config.ts",
-    "globalSetup.ts",
-    "globalTeardown.ts"
-  ],
+  "include": ["src/**/*", "eslint.config.js", "tests/**/*", "playwright.config.ts", "globalSetup.ts"],
   "exclude": ["node_modules", "dist"]
 }

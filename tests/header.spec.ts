@@ -1,10 +1,10 @@
-import {test} from '@src/baseTest';
+import {test} from '@playwright/test';
 import {User} from '@src/core/types';
-import * as UserSeed from '@src/seeds/user.seed';
+import UserSeed from '@src/seeds/user.seed';
 import HeaderSection from '@src/pages/common/header.section';
 import LoginPage from '@src/pages/common/login.page';
 import LoginAPIStub from '@src/apiStubs/loginAPI.stub';
-import PageHelper from '@src/core/pageHelper';
+import PageHelper from '@src/pages/common/pageHelper';
 
 // Pages
 let headerSection: HeaderSection;
@@ -18,6 +18,7 @@ let pageHelper: PageHelper;
 
 test.describe('User logs in and out', () => {
   let user: User;
+	const userSeed = new UserSeed();
 
   test.beforeEach(async ({page}) => {
     // Init
@@ -27,15 +28,15 @@ test.describe('User logs in and out', () => {
     pageHelper = new PageHelper(page);
 
     // Data seeds
-    user = await UserSeed.createUser();
+    user = await userSeed.createUser();
   });
   test.afterEach(async () => {
-    await UserSeed.deleteUser(user);
+    await userSeed.deleteUser(user);
   });
   test.describe('Success conditions', () => {
     test.describe('User not logged in', () => {
       test.beforeEach(async () => {
-        await loginAPIStub.simulateSuccess();
+        await loginAPIStub.stubWithDefault();
       });
       test(`should see the correct header`, async () => {
         await headerSection.shouldBeLoaded();
@@ -79,7 +80,7 @@ test.describe('User logs in and out', () => {
   });
   test.describe('Failure conditions', () => {
     test(`should see an error if login is invalid`, async () => {
-      await loginAPIStub.simulateUnAuthorised();
+      await loginAPIStub.simulateError(401);
       await headerSection.clickLogin();
       await loginPage.login(user);
       await loginPage.shouldShowInvalidLoginError();
@@ -89,7 +90,7 @@ test.describe('User logs in and out', () => {
       await headerSection.shouldBeLoggedOut();
     });
     test(`should see an error if login API errors out`, async () => {
-      await loginAPIStub.simulateGeneralError();
+      await loginAPIStub.simulateError(500);
       await headerSection.clickLogin();
       await loginPage.login(user);
       await loginPage.shouldShowGeneralError();
