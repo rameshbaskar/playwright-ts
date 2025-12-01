@@ -1,3 +1,5 @@
+import {Page} from "@playwright/test";
+
 export type User = {
   guid: string;
   username: string;
@@ -18,4 +20,12 @@ export type GoogleAnalyticsEvent = {
   eventAction: string;
   eventCategory: string;
   eventLabel?: string;
+};
+
+export type Fixture = {
+	page: Page;
+	auth: {
+		page: Page;
+		user: User;
+	}
 };
