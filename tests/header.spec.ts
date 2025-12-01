@@ -36,7 +36,7 @@ test.describe('User logs in and out', () => {
   test.describe('Success conditions', () => {
     test.describe('User not logged in', () => {
       test.beforeEach(async () => {
-        await loginAPIStub.simulateSuccess();
+        await loginAPIStub.stubWithDefault();
       });
       test(`should see the correct header`, async () => {
         await headerSection.shouldBeLoaded();
@@ -80,7 +80,7 @@ test.describe('User logs in and out', () => {
   });
   test.describe('Failure conditions', () => {
     test(`should see an error if login is invalid`, async () => {
-      await loginAPIStub.simulateUnAuthorised();
+      await loginAPIStub.simulateError(401);
       await headerSection.clickLogin();
       await loginPage.login(user);
       await loginPage.shouldShowInvalidLoginError();
@@ -90,7 +90,7 @@ test.describe('User logs in and out', () => {
       await headerSection.shouldBeLoggedOut();
     });
     test(`should see an error if login API errors out`, async () => {
-      await loginAPIStub.simulateGeneralError();
+      await loginAPIStub.simulateError(500);
       await headerSection.clickLogin();
       await loginPage.login(user);
       await loginPage.shouldShowGeneralError();

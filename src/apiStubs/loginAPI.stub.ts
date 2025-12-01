@@ -1,14 +1,15 @@
 import {Page} from '@playwright/test';
-import APIRequest from '@src/core/apiRequest';
-import loginSuccessResponse from '@src/fixtures/mockResponses/LoginSuccessResponse.json' assert {type: 'json'};
+import BaseStub from './base.stub';
 
-const URL_PATTERN = '**/v2/auth/login?**';
-export default class LoginAPIStub extends APIRequest {
-  constructor(page: Page) {
-    super(page, URL_PATTERN);
-  }
+import DefaultResponse from '@src/fixtures/mockResponses/loginSuccessResponse.json' assert {type: 'json'};
 
-  async simulateSuccess() {
-    await this.stub(loginSuccessResponse);
-  }
+export default class LoginApiStub extends BaseStub {
+	constructor(page: Page) {
+		super(
+			page,
+			`**/v2/auth/login?**`,
+			DefaultResponse,
+			200,
+		);
+	}
 }
