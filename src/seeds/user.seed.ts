@@ -1,12 +1,12 @@
 import {writeInTransaction} from '@src/core/database';
 import {User, DatabaseStatement} from '@src/core/types';
-import {getRandomUUID, getEncryptedString} from '@src/core/utils';
+import {getEncryptedString} from '@src/core/utils';
 import * as falso from '@ngneat/falso';
 
 const getNewUser = () => {
   const plainText = falso.randPassword();
   return {
-    guid: getRandomUUID(),
+    guid: falso.randUuid(),
     username: falso.randUserName({withAccents: false}),
     password: plainText,
     encPassword: getEncryptedString(plainText),
@@ -68,7 +68,7 @@ const getInsertContactNumbersTableStatement = (user: User) => {
   )`;
   return {
     sql: sql,
-    params: [getRandomUUID(), user.guid, user.mobile],
+    params: [falso.randUuid(), user.guid, user.mobile],
   } as DatabaseStatement;
 };
 
