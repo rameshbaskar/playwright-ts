@@ -1,6 +1,0 @@
-# Run linting and formatting checks
-echo "🔍 Running ESLint..."
-yarn lint:fix
-
-echo "🎨 Running Prettier..."
-yarn prettier
