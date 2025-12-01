@@ -4,7 +4,7 @@ import UserSeed from '@src/seeds/user.seed';
 import HeaderSection from '@src/pages/common/header.section';
 import LoginPage from '@src/pages/common/login.page';
 import LoginAPIStub from '@src/apiStubs/loginAPI.stub';
-import PageHelper from '@src/core/pageHelper';
+import PageHelper from '@src/pages/common/pageHelper';
 
 // Pages
 let headerSection: HeaderSection;

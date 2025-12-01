@@ -1,4 +1,4 @@
-import {GoogleAnalyticsEvent} from './types';
+import {GoogleAnalyticsEvent} from '@src/core/types';
 import {Page, expect, Request} from '@playwright/test';
 
 type DataLayerEvent = {
