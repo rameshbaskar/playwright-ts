@@ -1,6 +1,6 @@
 import {test} from '@src/baseTest';
 import {User} from '@src/core/types';
-import * as UserSeed from '@src/seeds/user.seed';
+import UserSeed from '@src/seeds/user.seed';
 import HeaderSection from '@src/pages/common/header.section';
 import LoginPage from '@src/pages/common/login.page';
 import LoginAPIStub from '@src/apiStubs/loginAPI.stub';
@@ -18,6 +18,7 @@ let pageHelper: PageHelper;
 
 test.describe('User logs in and out', () => {
   let user: User;
+	const userSeed = new UserSeed();
 
   test.beforeEach(async ({page}) => {
     // Init
@@ -27,10 +28,10 @@ test.describe('User logs in and out', () => {
     pageHelper = new PageHelper(page);
 
     // Data seeds
-    user = await UserSeed.createUser();
+    user = await userSeed.createUser();
   });
   test.afterEach(async () => {
-    await UserSeed.deleteUser(user);
+    await userSeed.deleteUser(user);
   });
   test.describe('Success conditions', () => {
     test.describe('User not logged in', () => {
