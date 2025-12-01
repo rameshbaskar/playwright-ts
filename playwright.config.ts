@@ -12,7 +12,6 @@ export default defineConfig({
   workers: undefined,
   reporter: [['list'], ['html', {open: 'never'}]],
   globalSetup: './globalSetup',
-  globalTeardown: './globalTeardown',
   use: {
     baseURL: process.env.BASE_URL,
     ignoreHTTPSErrors: true,
