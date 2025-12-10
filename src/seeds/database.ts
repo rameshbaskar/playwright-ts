@@ -38,6 +38,10 @@ export default class Database {
   }
 
 	async write() {
+		if (this.statements.length === 0) {
+			throw new Error('Nothing to write to DB. Pls add statements first.');
+		}
+
 		const client = this.getClient();
 		try {
 			await client.query('BEGIN');
