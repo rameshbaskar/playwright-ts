@@ -1,73 +1,53 @@
-import {GoogleAnalyticsEvent} from '@src/core/types';
-import {Page, expect, Request} from '@playwright/test';
+import {expect, Request, Locator} from '@playwright/test';
+import {getPage} from '@src/core/driver';
+import {GAEvent} from '@src/core/types';
 
-type DataLayerEvent = {
-  event: string;
-  event_action: string;
-  event_category: string;
-  event_label?: string;
+export const visit = async (url = '') => {
+  await getPage().goto(url);
 };
 
-export default class PageHelper {
-  private page: Page;
+export const createAuthSession = async (username: string) => {
+  const token = encodeURIComponent(
+    JSON.stringify({
+      username: username,
+      iat: null,
+      eat: null,
+    }),
+  );
+  await visit(`${process.env.LOGIN_API_URL}?token=${token}&redirect=${process.env.BASE_URL}`);
+};
 
-  constructor(page: Page) {
-    this.page = page;
-  }
+const getDataLayerEvents = async () => {
+  return await getPage().evaluate('window.dataLayer');
+};
 
-  async goto(url = '') {
-    await this.page.goto(url);
-  }
+export const verifyGAEvent = async (expEvent: GAEvent) => {
+  const actualEvents = (await getDataLayerEvents()) as GAEvent[];
+  const matchedEvent = actualEvents.find(
+    (e) =>
+      e.event === expEvent.event &&
+      e.event_action === expEvent.event_action &&
+      e.event_category === expEvent.event_category &&
+      e.event_label === expEvent.event_label,
+  ) as GAEvent;
+  expect(matchedEvent).not.toBeUndefined();
+};
 
-  async createLoggedInSession(username: string) {
-    const token = encodeURIComponent(
-      JSON.stringify({
-        username: username,
-        iat: null,
-        eat: null,
-      }),
-    );
-    await this.goto(`${process.env.LOGIN_API_URL}?token=${token}&redirect=${process.env.BASE_URL}`);
-    await this.goto('/');
-  }
-
-  async getDataLayerEvents() {
-    return await this.page.evaluate('window.dataLayer');
-  }
-
-  async getGoogleAnalyticsEvents() {
-    const dataLayerEvents = (await this.getDataLayerEvents()) as DataLayerEvent[];
-    const googleAnalyticsEvents: Array<GoogleAnalyticsEvent> = [];
-    for (const event of dataLayerEvents) {
-      googleAnalyticsEvents.push({
-        eventName: event['event'],
-        eventAction: event['event_action'],
-        eventCategory: event['event_category'],
-        eventLabel: event['event_label'],
-      });
+export const waitForRequest = (urlPattern: string, method: 'GET' | 'POST' | 'PUT') => {
+  let request: Request | undefined;
+  getPage().on('request', (r) => {
+    if (r.url().includes(urlPattern) && r.method().toUpperCase() === method) {
+      request = r;
     }
-    return googleAnalyticsEvents;
-  }
+  });
+  return request;
+};
 
-  async verifyGoogleAnalyticsEvent(expEvent: GoogleAnalyticsEvent) {
-    const actualEvents = await this.getGoogleAnalyticsEvents();
-    const matchedEvent = actualEvents.find(
-      (e) =>
-        e.eventName === expEvent.eventName &&
-        e.eventAction === expEvent.eventAction &&
-        e.eventCategory === expEvent.eventCategory &&
-        e.eventLabel === expEvent.eventLabel,
-    );
-    expect(matchedEvent).not.toBeUndefined();
+export const verifyLink = async (locator: Locator, href: string, opensInNewTab: boolean) => {
+  await expect(locator).toHaveAttribute('href', href);
+  if (opensInNewTab) {
+    await expect(locator).toHaveAttribute('target', '_blank');
+  } else {
+    await expect(locator).not.toHaveAttribute('target');
   }
-
-  waitForRequest(urlPattern: string, method: string) {
-    let request: Request | undefined;
-    this.page.on('request', (r) => {
-      if (r.url().includes(urlPattern) && r.method().toLowerCase() === method.toLowerCase()) {
-        request = r;
-      }
-    });
-    return request;
-  }
-}
+};

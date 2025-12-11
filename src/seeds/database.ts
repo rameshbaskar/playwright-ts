@@ -12,9 +12,9 @@ export default class Database {
     this.statements = [];
   }
 
-	addStatement(statement: DatabaseStatement) {
-		this.statements.push(statement);
-	}
+  addStatement(statement: DatabaseStatement) {
+    this.statements.push(statement);
+  }
 
   getClient() {
     return new Client({
@@ -27,33 +27,31 @@ export default class Database {
 
   async read(statement: DatabaseStatement) {
     const client = this.getClient();
-		try {
-			const result = await client.query(statement.sql, statement.params);
-			return result.rows;
-    } catch (e) {
-			throw e;
-		} finally {
-			await client.end();
-		}
+    try {
+      const result = await client.query(statement.sql, statement.params);
+      return result.rows;
+    } finally {
+      await client.end();
+    }
   }
 
-	async write() {
-		if (this.statements.length === 0) {
-			throw new Error('Nothing to write to DB. Pls add statements first.');
-		}
+  async write() {
+    if (this.statements.length === 0) {
+      throw new Error('Nothing to write to DB. Pls add statements first.');
+    }
 
-		const client = this.getClient();
-		try {
-			await client.query('BEGIN');
-			for (const statement of this.statements) {
-				await client.query(statement.sql, statement.params);
-			}
-			await client.query('COMMIT');
-		} catch (e) {
-			await client.query('ROLLBACK');
-			throw e;
-		} finally {
-			await client.end();
-		}
-	}
+    const client = this.getClient();
+    try {
+      await client.query('BEGIN');
+      for (const statement of this.statements) {
+        await client.query(statement.sql, statement.params);
+      }
+      await client.query('COMMIT');
+    } catch (e) {
+      await client.query('ROLLBACK');
+      throw e;
+    } finally {
+      await client.end();
+    }
+  }
 }
