@@ -18,21 +18,21 @@
     "check": "yarn lint && yarn prettier:check && yarn build"
   },
   "devDependencies": {
-    "@ngneat/falso": "^8.0.1",
-    "@playwright/test": "^1.54.1",
-    "@types/node": "^24.0.13",
-    "@types/pg": "^8.15.4",
-    "@typescript-eslint/eslint-plugin": "^8.36.0",
-    "@typescript-eslint/parser": "^8.36.0",
-    "bcrypt-ts": "^7.1.0",
-    "dotenv": "^17.2.0",
-    "eslint": "^9.31.0",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-playwright": "^2.2.0",
-    "eslint-plugin-prettier": "^5.5.1",
-    "pg": "^8.16.3",
-    "prettier": "^3.6.2",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "@ngneat/falso": "8.0.1",
+    "@playwright/test": "1.55.1",
+    "@types/node": "24.0.13",
+    "@types/pg": "8.15.4",
+    "@typescript-eslint/eslint-plugin": "8.36.0",
+    "@typescript-eslint/parser": "8.36.0",
+    "bcrypt-ts": "7.1.0",
+    "dotenv": "17.2.0",
+    "eslint": "9.31.0",
+    "eslint-config-prettier": "10.1.5",
+    "eslint-plugin-playwright": "2.2.0",
+    "eslint-plugin-prettier": "5.5.1",
+    "pg": "8.16.3",
+    "prettier": "3.6.2",
+    "ts-node": "10.9.2",
+    "typescript": "5.8.3"
   }
 }
