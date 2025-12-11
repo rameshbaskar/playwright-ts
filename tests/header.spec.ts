@@ -4,7 +4,7 @@ import {User} from '@src/core/types';
 import UserSeed from '@src/seeds/user.seed';
 import * as HeaderSection from '@src/pages/common/header.section';
 import * as LoginPage from '@src/pages/common/login.page';
-import LoginApiStub from '@src/apiStubs/loginAPI.stub';
+import LoginApiStub from '@src/apiStubs/loginApi.stub';
 import * as PageHelper from '@src/pages/common/pageHelper';
 
 test.describe('User logs in and out', () => {
