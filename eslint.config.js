@@ -7,7 +7,6 @@ import prettierConfig from 'eslint-config-prettier';
 
 export default [
   js.configs.recommended,
-	'prettier',
   {
     files: ['**/*.{js,ts}'],
     languageOptions: {
@@ -25,6 +24,7 @@ export default [
         __filename: 'readonly',
         Buffer: 'readonly',
         global: 'readonly',
+        setTimeout: 'readonly',
       },
     },
     plugins: {
@@ -78,7 +78,7 @@ export default [
     },
   },
   {
-    ignores: ['node_modules/', 'dist/', 'build/', '*.config.js', '.husky/', 'playwright-report/', 'test-results/'],
+    ignores: ['node_modules/', 'dist/', 'build/', '*.config.js', 'playwright-report/', 'test-results/'],
   },
   prettierConfig,
 ];
