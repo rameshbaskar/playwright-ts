@@ -1,6 +1,6 @@
 import {expect, Request, Locator} from '@playwright/test';
-import {getPage} from '@src/core/driver';
-import {GAEvent} from '@src/core/types';
+import {getPage} from '@support/core/driver';
+import {GAEvent} from '@support/core/types';
 
 export const visit = async (url = '') => {
   await getPage().goto(url);

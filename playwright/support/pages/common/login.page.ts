@@ -1,6 +1,6 @@
 import {expect} from '@playwright/test';
-import {getPage} from '@src/core/driver';
-import {User} from '@src/core/types';
+import {getPage} from '@support/core/driver';
+import {User} from '@support/core/types';
 
 const locators = {
   usernameTextBox: () => getPage().getByRole('textbox', {name: 'Username'}),

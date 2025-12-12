@@ -17,9 +17,9 @@
     "baseUrl": "./",
     "types": ["node", "@playwright/test"],
     "paths": {
-      "@src/*": ["./src/*"]
+      "@support/*": ["./playwright/support/*"]
     }
   },
-  "include": ["src/**/*", "eslint.config.js", "tests/**/*", "playwright.config.ts", "globalSetup.ts"],
+  "include": ["eslint.config.js", "playwright/**/*", "playwright.config.ts", "globalSetup.ts"],
   "exclude": ["node_modules", "dist"]
 }

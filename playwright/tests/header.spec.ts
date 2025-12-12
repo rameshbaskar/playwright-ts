@@ -1,11 +1,11 @@
 import {test} from '@playwright/test';
-import {init} from '@src/core/driver';
-import {User} from '@src/core/types';
-import UserSeed from '@src/seeds/user.seed';
-import * as HeaderSection from '@src/pages/common/header.section';
-import * as LoginPage from '@src/pages/common/login.page';
-import LoginApiStub from '@src/apiStubs/loginApi.stub';
-import * as PageHelper from '@src/pages/common/pageHelper';
+import {init} from '@support/core/driver';
+import {User} from '@support/core/types';
+import UserSeed from '@support/seeds/user.seed';
+import * as HeaderSection from '@support/pages/common/header.section';
+import * as LoginPage from '@support/pages/common/login.page';
+import LoginApiStub from '@support/apiStubs/loginApi.stub';
+import * as PageHelper from '@support/pages/common/pageHelper';
 
 test.describe('User logs in and out', () => {
   let user: User;
