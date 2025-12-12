@@ -1,5 +1,5 @@
 import {expect} from '@playwright/test';
-import {getPage} from '@src/core/driver';
+import {getPage} from '@support/core/driver';
 import {verifyLink} from '@src/pages/common/pageHelper';
 
 const locators = {

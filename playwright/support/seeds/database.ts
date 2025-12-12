@@ -1,4 +1,4 @@
-import {DatabaseStatement} from '@src/core/types';
+import {DatabaseStatement} from '@support/core/types';
 import {Client} from 'pg';
 
 export default class Database {

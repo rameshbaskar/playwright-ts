@@ -1,4 +1,4 @@
-import {getPage} from '@src/core/driver';
+import {getPage} from '@support/core/driver';
 
 export default class BaseStub {
   urlPattern!: string;

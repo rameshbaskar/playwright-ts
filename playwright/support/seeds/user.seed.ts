@@ -1,6 +1,6 @@
 import Database from './database';
-import {User} from '@src/core/types';
-import {getEncryptedString} from '@src/core/utils';
+import {User} from '@support/core/types';
+import {getEncryptedString} from '@support/core/utils';
 import * as falso from '@ngneat/falso';
 
 export default class UserSeed extends Database {
