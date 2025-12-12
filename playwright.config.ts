@@ -5,7 +5,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 export default defineConfig({
-  testDir: './tests',
+  testDir: './playwright/tests',
   timeout: 120000, // Each test should complete within 2 mins
   fullyParallel: true,
   retries: process.env.RUN_ENV === 'local' ? 0 : 2,
