@@ -1,6 +1,6 @@
 import {expect} from '@playwright/test';
 import {getPage} from '@support/core/driver';
-import {verifyLink} from '@src/pages/common/pageHelper';
+import {verifyLink} from '@support/pages/common/pageHelper';
 
 const locators = {
   logo: () => getPage().getByTestId('header-logo'),

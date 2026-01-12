@@ -1,6 +1,6 @@
 import BaseStub from './base.stub';
 
-import DefaultResponse from '@src/fixtures/mockResponses/loginSuccessResponse.json' assert {type: 'json'};
+import DefaultResponse from '@support/fixtures/mockResponses/loginSuccessResponse.json' assert {type: 'json'};
 
 export default class LoginApiStub extends BaseStub {
   constructor() {
