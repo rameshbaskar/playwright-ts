@@ -60,28 +60,19 @@ yarn test:report
 
 ```
 playwright-ts/
-├── src/
+├── support/
 │   ├── apiStubs/**         # API stubs
-│   ├── core/          			# Custom type definitions and useful utils
+│   ├── core/          		# Custom type definitions and useful utils
 │   ├── fixtures/**         # Mock API responses and data files
 │   ├── pages/**          	# POM (Page-Object-Model) files
 │   ├── seeds/**          	# Data manipulation utilities in the database
-├── tests/**								# Spec files
+├── tests/ui/**				# UI Spec files
+├── tests/api/**			# API Spec files
 ├── playwright.config.ts    # Playwright configuration
 ├── tsconfig.json           # TypeScript configuration
 ├── .env.example            # Environment variables template
 └── package.json            # Project dependencies
 ```
-
-## Scripts
-
-| Script 							| Description 											|
-|---------------------|-----------------------------------|
-| `yarn build` 				| Compile TypeScript to JavaScript 	|
-| `yarn test` 				| Run Playwright tests 							|
-| `yarn test:headed` 	| Run tests with visible browser 		|
-| `yarn test:ui` 			| Interactive test runner 					|
-| `yarn test:report` 	| View HTML test report 						|
 
 ## Contributing
 
