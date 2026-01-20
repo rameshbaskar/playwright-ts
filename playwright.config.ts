@@ -12,10 +12,29 @@ export default defineConfig({
   workers: undefined,
   reporter: [['list'], ['html', {open: 'never'}]],
   globalSetup: './globalSetup',
-  use: {
-    baseURL: process.env.BASE_URL,
-    ignoreHTTPSErrors: true,
-    trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
-  },
+  projects: [
+    {
+      // For UI
+      name: 'ui',
+      testMatch: `**/ui/**/*.spec.ts`,
+      use: {
+        baseURL: process.env.UI_BASE_URL,
+        ignoreHTTPSErrors: true,
+        trace: 'on-first-retry',
+        screenshot: 'only-on-failure',
+      },
+    },
+    {
+      // For API
+      name: 'api',
+      testMatch: `**/api/**/*.spec.ts`,
+      use: {
+        baseURL: process.env.API_BASE_URL,
+        extraHTTPHeaders: {
+          Accept: 'application/json',
+          Authorization: `token ${process.env.API_KEY}`,
+        },
+      },
+    },
+  ],
 });

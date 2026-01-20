@@ -1,33 +1,40 @@
-import {expect} from '@playwright/test';
-import {getPage} from '@support/core/driver';
-import {verifyLink} from '@support/pages/common/pageHelper';
+import {expect, Page, Locator} from '@playwright/test';
+import BasePage from '@support/pages/base.page';
 
-const locators = {
-  logo: () => getPage().getByTestId('header-logo'),
-  homeLink: () => getPage().getByRole('link', {name: 'Home'}),
-  loginLink: () => getPage().getByRole('link', {name: 'Login'}),
-  logoutLink: () => getPage().getByRole('link', {name: 'Logout'}),
-};
+export default class HeaderSection extends BasePage {
+  readonly logo: Locator;
+  readonly homeLink: Locator;
+  readonly loginLink: Locator;
+  readonly logoutLink: Locator;
 
-export const shouldBeLoaded = async () => {
-  await verifyLink(locators.logo(), process.env.BASE_URL!, true);
-  await verifyLink(locators.homeLink(), process.env.BASE_URL!, true);
-};
+  constructor(page: Page) {
+    super(page);
+    this.logo = page.getByTestId('header-logo');
+    this.homeLink = page.getByRole('link', {name: 'Home'});
+    this.loginLink = page.getByRole('link', {name: 'Login'});
+    this.logoutLink = page.getByRole('link', {name: 'Logout'});
+  }
 
-export const shouldBeLoggedIn = async () => {
-  await expect(locators.loginLink()).toBeHidden();
-  await expect(locators.logoutLink()).toBeVisible();
-};
+  async shouldBeLoaded() {
+    await this.verifyLink(this.logo, process.env.BASE_URL!, true);
+    await this.verifyLink(this.homeLink, process.env.BASE_URL!, true);
+  }
 
-export const shouldBeLoggedOut = async () => {
-  await expect(locators.loginLink()).toBeVisible();
-  await expect(locators.logoutLink()).toBeHidden();
-};
+  async shouldBeLoggedIn() {
+    await expect(this.loginLink).not.toBeVisible();
+    await expect(this.logoutLink).toBeVisible();
+  }
 
-export const clickLogin = async () => {
-  await locators.loginLink().click();
-};
+  async shouldBeLoggedOut() {
+    await expect(this.loginLink).toBeVisible();
+    await expect(this.logoutLink).not.toBeVisible();
+  }
 
-export const clickLogout = async () => {
-  await locators.logoutLink().click();
-};
+  async clickLogin() {
+    await this.loginLink.click();
+  }
+
+  async clickLogout() {
+    await this.logoutLink.click();
+  }
+}
