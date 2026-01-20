@@ -1,19 +1,25 @@
 import {test} from '@playwright/test';
-import {init} from '@support/core/driver';
 import {User} from '@support/core/types';
 import UserSeed from '@support/seeds/user.seed';
-import * as HeaderSection from '@support/pages/common/header.section';
-import * as LoginPage from '@support/pages/common/login.page';
+import HomePage from '@support/pages/common/home.page';
+import HeaderSection from '@support/pages/common/header.section';
+import LoginPage from '@support/pages/common/login.page';
 import LoginApiStub from '@support/apiStubs/loginApi.stub';
-import * as PageHelper from '@support/pages/common/pageHelper';
 
 test.describe('User logs in and out', () => {
   let user: User;
-  const userSeed = new UserSeed();
-  const loginApiStub = new LoginApiStub();
+  let loginApiStub: LoginApiStub;
+  let homePage: HomePage;
+  let headerSection: HeaderSection;
+  let loginPage: LoginPage;
 
-  test.beforeEach(async () => {
-    await init();
+  const userSeed = new UserSeed();
+
+  test.beforeEach(async ({page}) => {
+    loginApiStub = new LoginApiStub(page);
+    loginPage = new LoginPage(page);
+    homePage = new HomePage(page);
+    headerSection = new HeaderSection(page);
   });
   test.afterEach(async () => {
     await userSeed.deleteUser(user);
@@ -26,23 +32,23 @@ test.describe('User logs in and out', () => {
     });
     test.describe('Success conditions', () => {
       test(`should see the correct header`, async () => {
-        await HeaderSection.shouldBeLoaded();
-        await HeaderSection.shouldBeLoggedOut();
+        await headerSection.shouldBeLoaded();
+        await headerSection.shouldBeLoggedOut();
       });
       test(`should be able to login and logout from the header`, async () => {
         // Login
-        await HeaderSection.clickLogin();
-        await LoginPage.shouldBeLoaded();
-        await LoginPage.login(user);
-        await HeaderSection.shouldBeLoggedIn();
+        await headerSection.clickLogin();
+        await loginPage.shouldBeLoaded();
+        await loginPage.login(user);
+        await headerSection.shouldBeLoggedIn();
 
         // Logout
-        await HeaderSection.clickLogout();
-        await HeaderSection.shouldBeLoggedOut();
+        await headerSection.clickLogout();
+        await headerSection.shouldBeLoggedOut();
       });
       test(`should send the GA event when clicking on Login from the header`, async () => {
-        await HeaderSection.clickLogin();
-        await PageHelper.verifyGAEvent({
+        await headerSection.clickLogin();
+        await headerSection.verifyGAEvent({
           event: 'LoginFromHeader',
           event_action: 'Login-From-Header',
           event_category: 'Login',
@@ -54,34 +60,34 @@ test.describe('User logs in and out', () => {
     test.describe('Failure conditions', () => {
       test(`should see an error if login is invalid`, async () => {
         await loginApiStub.simulateError(401);
-        await HeaderSection.clickLogin();
-        await LoginPage.login(user);
-        await LoginPage.shouldShowInvalidLoginError();
+        await headerSection.clickLogin();
+        await loginPage.login(user);
+        await loginPage.shouldShowInvalidLoginError();
 
         // Check the header in the home page
-        await PageHelper.visit('/');
-        await HeaderSection.shouldBeLoggedOut();
+        await homePage.visit();
+        await headerSection.shouldBeLoggedOut();
       });
       test(`should see an error if login API errors out`, async () => {
         await loginApiStub.simulateError(500);
-        await HeaderSection.clickLogin();
-        await LoginPage.login(user);
-        await LoginPage.shouldShowGeneralError();
+        await headerSection.clickLogin();
+        await loginPage.login(user);
+        await loginPage.shouldShowGeneralError();
 
         // Check the header in the home page
-        await PageHelper.visit('/');
-        await HeaderSection.shouldBeLoggedOut();
+        await homePage.visit();
+        await headerSection.shouldBeLoggedOut();
       });
     });
   });
 
   test.describe('User already logged in', () => {
     test.beforeEach(async () => {
-      await PageHelper.createAuthSession(user.username);
+      await homePage.createAuthSession(user.username);
     });
     test(`should send the GA event when clicking on Logout from the header`, async () => {
-      await HeaderSection.clickLogout();
-      await PageHelper.verifyGAEvent({
+      await headerSection.clickLogout();
+      await headerSection.verifyGAEvent({
         event: 'LogoutFromHeader',
         event_action: 'Logout-From-Header',
         event_category: 'Logout',

@@ -1,18 +1,20 @@
-import {getPage} from '@support/core/driver';
+import {Page} from '@playwright/test';
 
 export default class BaseStub {
-  urlPattern!: string;
-  defaultPayload!: object;
-  defaultStatusCode!: number;
+  readonly page: Page;
+  readonly urlPattern!: string;
+  readonly defaultPayload!: object;
+  readonly defaultStatusCode!: number;
 
-  constructor(urlPattern: string, defaultPayload: object, defaultStatusCode: number) {
+  constructor(page: Page, urlPattern: string, defaultPayload: object, defaultStatusCode: number) {
+    this.page = page;
     this.urlPattern = urlPattern;
     this.defaultPayload = defaultPayload;
     this.defaultStatusCode = defaultStatusCode;
   }
 
   async stubWithCustomPayload(payload: object, statusCode: number) {
-    await getPage().route(this.urlPattern, (router) => {
+    await this.page.route(this.urlPattern, (router) => {
       router.fulfill({
         status: statusCode,
         body: JSON.stringify(payload),
@@ -26,7 +28,7 @@ export default class BaseStub {
   }
 
   async delay(ms: number) {
-    await getPage().route(this.urlPattern, (router) => {
+    await this.page.route(this.urlPattern, (router) => {
       setTimeout(() => {
         router.continue();
       }, ms);
@@ -34,7 +36,7 @@ export default class BaseStub {
   }
 
   async stubWithDelay(ms: number, payload: object, statusCode: number) {
-    await getPage().route(this.urlPattern, (router) => {
+    await this.page.route(this.urlPattern, (router) => {
       setTimeout(() => {
         router.fulfill({
           status: statusCode,
@@ -50,6 +52,6 @@ export default class BaseStub {
   }
 
   async reset() {
-    await getPage().unroute(this.urlPattern);
+    await this.page.unroute(this.urlPattern);
   }
 }

@@ -1,29 +1,38 @@
-import {expect} from '@playwright/test';
-import {getPage} from '@support/core/driver';
+import {expect, Locator, Page} from '@playwright/test';
 import {User} from '@support/core/types';
+import BasePage from '@support/pages/base.page';
 
-const locators = {
-  usernameTextBox: () => getPage().getByRole('textbox', {name: 'Username'}),
-  passwordTextBox: () => getPage().getByRole('textbox', {name: 'Password'}),
-  loginButton: () => getPage().getByRole('button', {name: 'Login'}),
-};
+export default class LoginPage extends BasePage {
+  readonly usernameTextBox: Locator;
+  readonly passwordTextBox: Locator;
+  readonly loginButton: Locator;
 
-export const shouldBeLoaded = async () => {
-  await expect(locators.usernameTextBox()).toBeVisible();
-  await expect(locators.passwordTextBox()).toBeVisible();
-  await expect(locators.loginButton()).toBeVisible();
-};
+  constructor(page: Page) {
+    super(page);
+    this.usernameTextBox = page.getByRole('textbox', {name: 'Username'});
+    this.passwordTextBox = page.getByRole('textbox', {name: 'Password'});
+    this.loginButton = page.getByRole('button', {name: 'Login'});
+  }
 
-export const login = async (user: User) => {
-  await locators.usernameTextBox().fill(user.username);
-  await locators.passwordTextBox().fill(user.password);
-  await locators.loginButton().click();
-};
+  async shouldBeLoaded() {
+    await expect(this.usernameTextBox).toBeVisible();
+    await expect(this.passwordTextBox).toBeVisible();
+    await expect(this.loginButton).toBeVisible();
+  }
 
-export const shouldShowGeneralError = async () => {
-  await expect(getPage().getByText('Cannot login. Please try after sometime.')).toBeVisible();
-};
+  async login(user: User) {
+    await this.usernameTextBox.fill(user.username);
+    await this.passwordTextBox.fill(user.password);
+    await this.loginButton.click();
+  }
 
-export const shouldShowInvalidLoginError = async () => {
-  await expect(getPage().getByText('Invalid credentials.')).toBeVisible();
-};
+  async shouldShowGeneralError() {
+    const error = this.page.getByText('Cannot login. Please try after sometime.');
+    await expect(error).toBeVisible();
+  }
+
+  async shouldShowInvalidLoginError() {
+    const error = this.page.getByText('Invalid credentials.');
+    await expect(error).toBeVisible();
+  }
+}
