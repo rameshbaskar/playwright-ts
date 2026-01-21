@@ -1,27 +1,27 @@
-# Playwright TypeScript with PostgreSQL
+# Playwright Test Automation Framework
 
-A modern testing framework setup using Playwright with TypeScript and PostgreSQL database integration.
+This is a test automation framework using Playwright with TypeScript for UI and API testing.
 
 ## Features
 
 - 🎭 **Playwright Testing Framework** - Cross-browser end-to-end testing
 - 📘 **TypeScript Support** - Full type safety and modern JavaScript features
-- 🐘 **PostgreSQL Integration** - Postgres database support
-- 🔒 **Transaction Support** - Safe database operations with rollback capability
-- 🧪 **Test Integration** - Database testing alongside UI testing
+- 🚀 **UI & API Testing** - Separate configurations for UI and API tests
+- 🐘 **PostgreSQL Integration** - Postgres database support for data seeding
+- 💅 **Linting & Formatting** - ESLint and Prettier for code quality and consistency
 
 ## Prerequisites
 
 - Node.js (v16 or higher)
 - Yarn package manager
-- PostgreSQL database server
+- PostgreSQL database server (for running tests that require database interaction)
 
 ## Quick Start
 
 ### 1. Clone and Install
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/rameshbaskar/playwright-ts.git
 cd playwright-ts
 yarn install
 ```
@@ -34,25 +34,27 @@ npx playwright install
 
 ### 3. Environment Setup
 
-Copy the environment template and configure your environment:
+Copy the environment template and configure your environment variables:
 
 ```bash
 cp .env.example .env
 ```
 
+Update the `.env` file with your database credentials and application URLs.
+
 ### 4. Run Tests
 
 ```bash
-# Run all tests
-yarn test
+# Run all tests (UI and API)
+yarn test:all
 
-# Run tests in headed mode (visible browser)
-yarn test:headed
+# Run only UI tests
+yarn test:e2e
 
-# Run tests with UI mode
-yarn test:ui
+# Run only API tests
+yarn test:api
 
-# View test report
+# View the test report
 yarn test:report
 ```
 
@@ -61,27 +63,49 @@ yarn test:report
 ```
 playwright-ts/
 ├── support/
-│   ├── apiStubs/**         # API stubs
-│   ├── core/          		# Custom type definitions and useful utils
-│   ├── fixtures/**         # Mock API responses and data files
-│   ├── pages/**          	# POM (Page-Object-Model) files
-│   ├── seeds/**          	# Data manipulation utilities in the database
-├── tests/ui/**				# UI Spec files
-├── tests/api/**			# API Spec files
-├── playwright.config.ts    # Playwright configuration
-├── tsconfig.json           # TypeScript configuration
-├── .env.example            # Environment variables template
-└── package.json            # Project dependencies
+│   ├── apiStubs/         # API stubs for mocking API responses
+│   ├── core/             # Custom type definitions and utility functions
+│   ├── fixtures/         # Mock API responses and data files
+│   ├── pages/            # Page-Object-Model (POM) files for UI tests
+│   ├── seeds/            # Data seeding utilities for the database
+├── tests/
+│   ├── ui/               # UI test specifications
+│   ├── api/              # API test specifications
+├── .env.example          # Environment variables template
+├── globalSetup.ts        # Global setup file for tests
+├── package.json          # Project dependencies and scripts
+├── playwright.config.ts  # Playwright configuration
+└── tsconfig.json         # TypeScript configuration
 ```
+
+## Available Scripts
+
+| Script              | Description                                               |
+|---------------------|-----------------------------------------------------------|
+| `build`             | Compiles the TypeScript code.                             |
+| `test:all`          | Runs all tests (UI and API).                              |
+| `test:e2e`          | Runs only the UI tests.                                   |
+| `e2e:headed`        | Runs the UI tests in headed mode (visible browser).       |
+| `e2e:debug`         | Runs the UI tests in debug mode.                          |
+| `e2e:interactive`   | Runs the UI tests in interactive UI mode.                 |
+| `test:api`          | Runs only the API tests.                                  |
+| `api:debug`         | Runs the API tests in debug mode.                         |
+| `api:interactive`   | Runs the API tests in interactive UI mode.                |
+| `test:report`       | Shows the Playwright test report.                         |
+| `lint`              | Lints the codebase using ESLint.                          |
+| `lint:fix`          | Lints the codebase and automatically fixes issues.        |
+| `prettier`          | Formats the codebase using Prettier.                      |
+| `prettier:check`    | Checks the formatting of the codebase.                    |
+| `check`             | Runs the linter, Prettier check, and TypeScript compiler. |
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Run the test suite
-6. Submit a pull request
+1.  Fork the repository.
+2.  Create a feature branch.
+3.  Make your changes.
+4.  Add tests for new functionality.
+5.  Run the test suite to ensure all tests pass.
+6.  Submit a pull request.
 
 ## License
 
