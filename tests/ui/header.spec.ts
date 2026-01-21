@@ -21,6 +21,7 @@ test.describe('User logs in and out', () => {
     homePage = new HomePage(page);
     headerSection = new HeaderSection(page);
   });
+
   test.afterEach(async () => {
     await userSeed.deleteUser(user);
   });
@@ -30,11 +31,13 @@ test.describe('User logs in and out', () => {
       await loginApiStub.stubWithDefault();
       user = await userSeed.createUser();
     });
+
     test.describe('Success conditions', () => {
       test(`should see the correct header`, async () => {
         await headerSection.shouldBeLoaded();
         await headerSection.shouldBeLoggedOut();
       });
+
       test(`should be able to login and logout from the header`, async () => {
         // Login
         await headerSection.clickLogin();
@@ -46,6 +49,7 @@ test.describe('User logs in and out', () => {
         await headerSection.clickLogout();
         await headerSection.shouldBeLoggedOut();
       });
+
       test(`should send the GA event when clicking on Login from the header`, async () => {
         await headerSection.clickLogin();
         await headerSection.verifyGAEvent({
@@ -68,6 +72,7 @@ test.describe('User logs in and out', () => {
         await homePage.visit();
         await headerSection.shouldBeLoggedOut();
       });
+
       test(`should see an error if login API errors out`, async () => {
         await loginApiStub.simulateError(500);
         await headerSection.clickLogin();
@@ -85,6 +90,7 @@ test.describe('User logs in and out', () => {
     test.beforeEach(async () => {
       await homePage.createAuthSession(user.username);
     });
+
     test(`should send the GA event when clicking on Logout from the header`, async () => {
       await headerSection.clickLogout();
       await headerSection.verifyGAEvent({
