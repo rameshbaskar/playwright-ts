@@ -20,6 +20,6 @@
       "@support/*": ["./support/*"]
     }
   },
-  "include": ["eslint.config.js", "playwright.config.ts", "globalSetup.ts"],
+  "include": ["eslint.config.js", "./support/**/*.ts", "./tests/**/*.ts", "playwright.config.ts", "globalSetup.ts"],
   "exclude": ["node_modules", "dist"]
 }
