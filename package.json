@@ -23,21 +23,21 @@
     "check": "yarn lint && yarn prettier:check && yarn build"
   },
   "devDependencies": {
-    "@ngneat/falso": "8.0.1",
-    "@playwright/test": "1.55.1",
-    "@types/node": "24.0.13",
-    "@types/pg": "8.15.4",
-    "@typescript-eslint/eslint-plugin": "8.36.0",
-    "@typescript-eslint/parser": "8.36.0",
-    "bcrypt-ts": "7.1.0",
-    "dotenv": "17.2.0",
-    "eslint": "9.31.0",
-    "eslint-config-prettier": "10.1.5",
-    "eslint-plugin-playwright": "2.2.0",
-    "eslint-plugin-prettier": "5.5.1",
-    "pg": "8.16.3",
-    "prettier": "3.6.2",
+    "@ngneat/falso": "8.0.2",
+    "@playwright/test": "1.57.0",
+    "@types/node": "25.0.9",
+    "@types/pg": "8.16.0",
+    "@typescript-eslint/eslint-plugin": "8.53.1",
+    "@typescript-eslint/parser": "8.53.1",
+    "bcrypt-ts": "8.0.0",
+    "dotenv": "17.2.3",
+    "eslint": "9.39.2",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-playwright": "2.5.0",
+    "eslint-plugin-prettier": "5.5.5",
+    "pg": "8.17.2",
+    "prettier": "3.8.0",
     "ts-node": "10.9.2",
-    "typescript": "5.8.3"
+    "typescript": "5.9.3"
   }
 }
