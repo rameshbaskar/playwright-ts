@@ -1,4 +1,4 @@
-import Database from './database';
+import Database from '@support/core/database';
 import {User} from '@support/core/types';
 import {getEncryptedString} from '@support/core/utils';
 import * as falso from '@ngneat/falso';
