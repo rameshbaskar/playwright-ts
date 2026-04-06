@@ -1,27 +1,14 @@
 import Database from '@support/core/database';
 import {User} from '@support/core/types';
-import {getEncryptedString} from '@support/core/utils';
+import {getValidUser} from '@support/seeds/factories/user.factory';
 import * as falso from '@ngneat/falso';
 
 export default class UserSeed extends Database {
-  private getNewUserData() {
-    const plainTextPassword = falso.randPassword();
-    return {
-      guid: falso.randUuid(),
-      username: falso.randUserName({withAccents: false}),
-      password: plainTextPassword,
-      encPassword: getEncryptedString(plainTextPassword),
-      fullName: falso.randFullName({withAccents: false}),
-      email: falso.randEmail(),
-      mobile: falso.randPhoneNumber({countryCode: 'SG'}),
-    } as User;
-  }
-
-  async createUser() {
+  async createUser(user?: User) {
     this.resetStatements();
 
     // Step 1: Get a fresh user profile data
-    const user = this.getNewUserData();
+    user = user || getValidUser();
 
     // Step 2: Insert into 'users' table
     this.addStatement({
